@@ -6,6 +6,6 @@ type Board struct{
 	Id int64
 }
 
-func (b *Board) foo() {
+func (b *Board) Foo() {
 	fmt.Println("foo")
 }
