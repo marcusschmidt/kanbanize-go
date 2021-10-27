@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"reflect"
 )
 
 type Client struct {
@@ -40,6 +41,15 @@ func (c *Client) doRequest(action string, input interface{}, outputRef interface
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		log.Fatalf("unable to read response body, %v", err)
+	}
+
+	// some responses contain dynamically created structure
+	// you can pass a *string to get the raw response data
+	t := reflect.TypeOf(outputRef).String()
+	if t == "*string" {
+		s := outputRef.(*string)
+		*s = string(body)
+		return
 	}
 
 	err = json.Unmarshal(body, outputRef)
