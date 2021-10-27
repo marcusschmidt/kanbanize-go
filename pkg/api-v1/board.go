@@ -109,10 +109,6 @@ type GetBoardSettingsOutput struct {
 	CustomFields []interface{} `json:"customFields"`
 }
 
-type RawOutput struct {
-	data string
-}
-
 func (c *Client) GetBoardSettings(input *GetBoardSettingsInput) string {
 	o := ""
 
