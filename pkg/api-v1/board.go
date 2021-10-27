@@ -96,3 +96,27 @@ func (c *Client) GetFullBoardStructure(input *GetFullBoardStructureInput) GetFul
 
 	return b
 }
+
+type GetBoardSettingsInput struct {
+	BoardId string `json:"boardid"`
+}
+
+type GetBoardSettingsOutput struct {
+	Avatars      []interface{} `json:"avatars"`
+	Usernames    []string      `json:"usernames"`
+	Templates    []string      `json:"templates"`
+	Types        []string      `json:"types"`
+	CustomFields []interface{} `json:"customFields"`
+}
+
+type RawOutput struct {
+	data string
+}
+
+func (c *Client) GetBoardSettings(input *GetBoardSettingsInput) string {
+	o := ""
+
+	c.doRequest("get_board_settings", input, &o)
+
+	return o
+}
