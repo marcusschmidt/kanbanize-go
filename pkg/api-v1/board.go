@@ -110,6 +110,8 @@ type GetBoardSettingsOutput struct {
 }
 
 func (c *Client) GetBoardSettings(input *GetBoardSettingsInput) string {
+	// use string for output because this response contains a dynamically structured json object,
+	// which can not be parsed to a struct
 	o := ""
 
 	c.doRequest("get_board_settings", input, &o)
